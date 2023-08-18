@@ -2,9 +2,11 @@ import React, { useState, useContext } from "react";
 
 import Logo from "../../olx-logo.png";
 import "./Signup.css";
-import { FirebaseContext } from "../../store/FirebaseContext";
+import { FirebaseContext } from "../../store/Context";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -12,15 +14,29 @@ export default function Signup() {
   const { firebase } = useContext(FirebaseContext);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username);
-    console.log(firebase);
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((r) => {
-        console.log(r);
-        r.user.updateProfile({ displayName: username });
+        r.user.updateProfile({ displayName: username }).then(() => {
+          firebase
+            .firestore()
+            .collection("users")
+            .add({
+              id: r.user.uid,
+              username: username,
+              email: email,
+            })
+            .then(() => {
+              navigate("/login");
+            });
+        });
+      })
+      .catch((error) => {
+        var errorMessage = error.message;
+        alert(errorMessage)
       });
+
   };
   return (
     <div>
