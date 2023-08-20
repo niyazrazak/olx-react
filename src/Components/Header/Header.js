@@ -38,7 +38,7 @@ function Header() {
                     <Arrow></Arrow>
                 </div>
                 <div className="loginPage">
-                    <span>{user ? user.displayName : 'Login'}</span>
+                    <span>{user ? user.displayName : <span onClick={()=> navigate('/login')}>Login</span>}</span>
                     <hr />
                 </div>
                 {

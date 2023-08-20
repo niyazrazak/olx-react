@@ -5,6 +5,7 @@ import SignupPage from './Pages/Signup.js';
 import LoginPage from './Pages/Login';
 import { useContext, useEffect } from 'react';
 import { AuthContext, FirebaseContext } from './store/Context';
+import CreatePage from './Pages/Create';
 
 function App() {
   const { setUser } = useContext(AuthContext);
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/create" element={<CreatePage />} />
         </Routes>
       </BrowserRouter>
     </div>
