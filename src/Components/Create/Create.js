@@ -2,8 +2,10 @@ import React, { Fragment, useContext, useState } from 'react';
 import './Create.css';
 import Header from '../Header/Header';
 import { AuthContext, FirebaseContext } from '../../store/Context';
+import { useNavigate } from 'react-router-dom';
 
 const Create = () => {
+    const navigate = useNavigate();
     const { firebase } = useContext(FirebaseContext);
     const { user } = useContext(AuthContext);
     const [name, setName] = useState('');
@@ -23,6 +25,7 @@ const Create = () => {
                     url,
                     createdAt: date.toDateString()
                 })
+                navigate('/')
             })
         })
     }

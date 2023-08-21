@@ -14,7 +14,7 @@ function Header() {
     return (
         <div className="headerParentDiv">
             <div className="headerChildDiv">
-                <div className="brandName">
+                <div onClick={() => navigate('/')} className="brandName">
                     <OlxLogo></OlxLogo>
                 </div>
                 <div className="placeSearch">
@@ -38,7 +38,7 @@ function Header() {
                     <Arrow></Arrow>
                 </div>
                 <div className="loginPage">
-                    <span>{user ? user.displayName : <span onClick={()=> navigate('/login')}>Login</span>}</span>
+                    <span>{user ? user.displayName : <span onClick={() => navigate('/login')}>Login</span>}</span>
                     <hr />
                 </div>
                 {
@@ -50,7 +50,7 @@ function Header() {
                     </div>
                 }
 
-                <div className="sellMenu">
+                <div onClick={() => navigate('/create')} className="sellMenu">
                     <SellButton></SellButton>
                     <div className="sellMenuContent">
                         <SellButtonPlus></SellButtonPlus>
